@@ -1,8 +1,0 @@
-Flask
-pandas
-openpyxl
-xhtml2pdf
-reportlab
-Pillow
-pypdf
-maxapi
