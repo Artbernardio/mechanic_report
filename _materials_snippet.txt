@@ -1,0 +1,76 @@
+        ) { page ->
+            when (page) {
+                0 -> {
+                    val scroll = rememberScrollState()
+                    Column(
+                        Modifier
+                            .fillMaxWidth()
+                            .verticalScroll(scroll),
+                        verticalArrangement = Arrangement.spacedBy(10.dp),
+                    ) {
+                        QuizFormHeader(
+                            companyCode = companyCode,
+                            step = 1,
+                            totalSteps = FORM_STEPS,
+                        )
+                        BasicInfoFields(
+                            date = date,
+                            onDateChange = { date = it },
+                            onOpenCalendar = { showDatePicker = true },
+                            organization = organization,
+                            onOrganizationChange = { organization = it },
+                            equipmentType = equipmentType,
+                            onEquipmentTypeChange = { equipmentType = it },
+                            serialNumber = serialNumber,
+                            onSerialNumberChange = { serialNumber = it },
+                            internalNumber = internalNumber,
+                            onInternalNumberChange = { internalNumber = it },
+                            location = location,
+                            onLocationChange = { location = it },
+                            engineHours = engineHours,
+                            onEngineHoursChange = { engineHours = it },
+                            year = year,
+                            onYearChange = { year = it.filter(Char::isDigit).take(4) },
+                            onOpenYearPicker = { showYearPicker = true },
+                        )
+                    }
+                }
+                1 -> {
+                    Column(Modifier.fillMaxSize()) {
+                        QuizFormHeader(
+                            companyCode = companyCode,
+                            step = 2,
+                            totalSteps = FORM_STEPS,
+                        )
+                        WorkTypesFields(
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth(),
+                            workTypes = workTypes,
+                            workDescription = workDescription,
+                            onWorkDescriptionChange = { workDescription = it.take(1000) },
+                            recommendations = recommendations,
+                            onRecommendationsChange = { recommendations = it.take(470) },
+                        )
+                    }
+                }
+                else -> {
+                    Column(
+                        Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        QuizFormHeader(
+                            companyCode = companyCode,
+                            step = 3,
+                            totalSteps = FORM_STEPS,
+                        )
+                        MaterialsFields(
+                            materials = materials,
+                            modifier = Modifier
+                                .weight(1f)
+                                .fillMaxWidth(),
+                        )
+                    }
+                }
+            }
+        }
